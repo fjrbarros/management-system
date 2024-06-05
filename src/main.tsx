@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { PersistentDrawerLeft } from './App.tsx';
+import { RouterProvider } from 'react-router-dom';
+import { routers } from './routers';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <PersistentDrawerLeft />
+    <RouterProvider router={routers} />
   </React.StrictMode>,
 );
