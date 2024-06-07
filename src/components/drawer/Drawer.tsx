@@ -1,17 +1,15 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MailIcon from '@mui/icons-material/Mail';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { Drawer as MuiDrawer } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { styled, useTheme } from '@mui/material/styles';
-import * as React from 'react';
+import { styled } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
@@ -19,21 +17,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
 
-export const Dashboard = () => {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
+export const Drawer = () => {
   return (
-    <Drawer
+    <MuiDrawer
       sx={{
         width: drawerWidth,
         flexShrink: 0,
@@ -44,15 +34,11 @@ export const Dashboard = () => {
       }}
       variant="persistent"
       anchor="left"
-      open={open}
+      open={true}
     >
       <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'ltr' ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
+        <IconButton>
+          <ChevronLeftIcon />
         </IconButton>
       </DrawerHeader>
       <Divider />
@@ -81,6 +67,6 @@ export const Dashboard = () => {
           </ListItem>
         ))}
       </List>
-    </Drawer>
+    </MuiDrawer>
   );
 };
