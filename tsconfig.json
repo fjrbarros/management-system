@@ -23,6 +23,7 @@
     "baseUrl": "src",
     "paths": {
       "@components": ["components/index.ts"],
+      "@providers": ["providers/index.ts"],
     }
   },
   "include": ["src"],
