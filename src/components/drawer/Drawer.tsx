@@ -1,3 +1,4 @@
+import { DrawerProps } from '@components';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MailIcon from '@mui/icons-material/Mail';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -9,35 +10,25 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { styled } from '@mui/material/styles';
+import { DrawerHeader } from './Drawer.styles';
 
-const drawerWidth = 240;
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
-
-export const Drawer = () => {
+export const Drawer = ({ openDrawer, setOpenDrawer }: DrawerProps) => {
   return (
     <MuiDrawer
-      sx={{
-        width: drawerWidth,
+      sx={theme => ({
+        width: theme.drawer.width,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: drawerWidth,
+          width: theme.drawer.width,
           boxSizing: 'border-box',
         },
-      }}
+      })}
       variant="persistent"
       anchor="left"
-      open={true}
+      open={openDrawer}
     >
       <DrawerHeader>
-        <IconButton>
+        <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
           <ChevronLeftIcon />
         </IconButton>
       </DrawerHeader>

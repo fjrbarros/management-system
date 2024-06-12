@@ -6,6 +6,19 @@ import {
 import { PropsWithChildren, useMemo, useState } from 'react';
 import { ColorModeContext } from './Context';
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    drawer: {
+      width: number;
+    };
+  }
+  interface ThemeOptions {
+    drawer?: {
+      width?: number;
+    };
+  }
+}
+
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
 
@@ -24,14 +37,19 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
         palette: {
           mode,
         },
+        drawer: {
+          width: 240,
+        },
       }),
     [mode],
   );
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <CssBaseline />
-      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MuiThemeProvider>
     </ColorModeContext.Provider>
   );
 };

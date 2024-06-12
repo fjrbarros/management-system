@@ -10,6 +10,7 @@ export default defineConfig({
     alias: {
       '@components': '/src/components',
       '@providers': '/src/providers',
+      '@routers': '/src/routers',
     },
   },
 });
