@@ -17,6 +17,13 @@ export const createTheme = (mode: 'light' | 'dark') => {
       width: 240,
     },
     components: {
+      MuiTypography: {
+        styleOverrides: {
+          root: ({ theme: { palette } }) => ({
+            color: isDark ? palette.text.primary : palette.text.secondary,
+          }),
+        },
+      },
       MuiIconButton: {
         styleOverrides: {
           root: {
@@ -38,6 +45,13 @@ export const createTheme = (mode: 'light' | 'dark') => {
           },
         },
       },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            background: isDark ? '#1e1e1e' : '#ffffff',
+          },
+        },
+      },
       MuiCssBaseline: {
         styleOverrides: {
           body: {
@@ -47,11 +61,11 @@ export const createTheme = (mode: 'light' | 'dark') => {
               borderRadius: '5px',
             },
             '::-webkit-scrollbar-track': {
-              '-webkit-box-shadow': 'inset 0px 0px 3px rgba(0,0,0,.5)',
-              backgroundColor: isDark ? '#3e3e3e' : '#f5f5f5',
+              boxShadow: 'inset 0px 0px 3px rgba(0,0,0,.5)',
+              backgroundColor: isDark ? '#c6c6c6' : '#f5f5f5',
             },
             '::-webkit-scrollbar-thumb': {
-              backgroundColor: isDark ? '#666666' : '#bbb',
+              backgroundColor: isDark ? '#929292' : '#bbb',
               borderRadius: '5px',
             },
           },
