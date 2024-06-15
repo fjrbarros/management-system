@@ -1,10 +1,8 @@
 import { CssBaseline } from '@mui/material';
-import {
-  ThemeProvider as MuiThemeProvider,
-  createTheme,
-} from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useMemo, useState } from 'react';
 import { ColorModeContext } from './Context';
+import { createTheme } from './createTheme';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -31,18 +29,7 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     [],
   );
 
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-        drawer: {
-          width: 240,
-        },
-      }),
-    [mode],
-  );
+  const theme = useMemo(() => createTheme(mode), [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

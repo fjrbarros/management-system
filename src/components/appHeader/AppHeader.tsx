@@ -21,7 +21,7 @@ export const AppHeader = ({
   const { toggleColorMode } = useThemeContext();
 
   return (
-    <AppBar open={openDrawer}>
+    <AppBar open={openDrawer} elevation={2}>
       <Toolbar>
         <IconButton
           open={openDrawer}
