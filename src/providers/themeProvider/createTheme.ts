@@ -10,7 +10,7 @@ export const createTheme = (mode: 'light' | 'dark') => {
         main: isDark ? '#1e1e1e' : '#ffffff',
       },
       background: {
-        default: isDark ? '#3e3e3e' : '#dddddd',
+        default: isDark ? '#5b5b5b' : '#ededed',
       },
     },
     drawer: {
