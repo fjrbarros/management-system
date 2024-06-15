@@ -11,6 +11,7 @@ export default defineConfig({
       '@components': '/src/components',
       '@providers': '/src/providers',
       '@routers': '/src/routers',
+      '@hooks': '/src/hooks',
     },
   },
 });

@@ -1,7 +1,5 @@
-import { DrawerProps } from '@components';
+import { Link, modules } from '@components';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -9,41 +7,46 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { To, useLocation } from 'react-router-dom';
 import { DrawerContainer, DrawerHeader } from './Drawer.styles';
 
-export const Drawer = ({ openDrawer, setOpenDrawer }: DrawerProps) => {
+export interface IModules {
+  icon: React.ReactNode;
+  title: string;
+  uri: To;
+}
+
+interface DrawerProps {
+  openDrawer: boolean;
+  onClick?: () => void;
+}
+
+export const Drawer = ({ openDrawer, onClick }: DrawerProps) => {
+  const { pathname } = useLocation();
+
   return (
     <DrawerContainer variant="persistent" anchor="left" open={openDrawer}>
       <DrawerHeader>
-        <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+        <IconButton onClick={onClick}>
           <ChevronLeftIcon />
         </IconButton>
       </DrawerHeader>
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {modules.map(({ title, icon, uri }) => {
+          return (
+            pathname !== uri && (
+              <Link uri={uri} key={title}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={title} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            )
+          );
+        })}
       </List>
     </DrawerContainer>
   );

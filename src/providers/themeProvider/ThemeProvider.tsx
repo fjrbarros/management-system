@@ -1,3 +1,4 @@
+import { useLocalStorage } from '@hooks';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useMemo, useState } from 'react';
@@ -17,16 +18,26 @@ declare module '@mui/material/styles' {
   }
 }
 
+type TColorMode = 'light' | 'dark';
+
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const [storageValue, setStorageValue] = useLocalStorage<TColorMode>(
+    'color-mode',
+    'light',
+  );
+  const [mode, setMode] = useState<TColorMode>(storageValue);
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode(prevMode => {
+          const newMode = prevMode === 'light' ? 'dark' : 'light';
+          setStorageValue(newMode);
+          return newMode;
+        });
       },
     }),
-    [],
+    [setStorageValue],
   );
 
   const theme = useMemo(() => createTheme(mode), [mode]);

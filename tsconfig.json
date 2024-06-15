@@ -25,6 +25,7 @@
       "@components": ["components/index.ts"],
       "@providers": ["providers/index.ts"],
       "@routers": ["routers/index.ts"],
+      "@hooks": ["hooks/index.ts"],
     }
   },
   "include": ["src"],

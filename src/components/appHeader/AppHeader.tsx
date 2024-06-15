@@ -1,4 +1,3 @@
-import { DrawerProps } from '@components';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,13 +6,15 @@ import { useTheme } from '@mui/material/styles';
 import { useThemeContext } from '@providers';
 import { AppBar, IconButton, Toolbar } from './AppHeader.styles';
 
-interface AppHeaderProps extends DrawerProps {
+interface AppHeaderProps {
   title?: string;
+  openDrawer: boolean;
+  onClick?: () => void;
 }
 
 export const AppHeader = ({
   openDrawer,
-  setOpenDrawer,
+  onClick,
   title = '',
 }: AppHeaderProps) => {
   const theme = useTheme();
@@ -27,7 +28,7 @@ export const AppHeader = ({
           open={openDrawer}
           color="inherit"
           aria-label="open drawer"
-          onClick={() => setOpenDrawer(!openDrawer)}
+          onClick={onClick}
           edge="start"
         >
           <MenuIcon />

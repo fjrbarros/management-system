@@ -1,23 +1,30 @@
-import { AppHeader } from 'components/appHeader/AppHeader';
-import { Drawer } from 'components/drawer/Drawer';
-import { MainPage } from 'components/mainPage/MainPage';
+import { useLocalStorage } from '@hooks';
 import { PropsWithChildren, useState } from 'react';
+import { AppHeader } from '../appHeader/AppHeader';
+import { Drawer } from '../drawer/Drawer';
+import { MainPage } from '../mainPage/MainPage';
 
 interface PageWrapperProps extends PropsWithChildren {
   pageTitle?: string;
 }
 
 export const PageWrapper = ({ children, pageTitle }: PageWrapperProps) => {
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [storageDrawer, setStorageDrawer] = useLocalStorage('drawer', false);
+  const [openDrawer, setOpenDrawer] = useState(storageDrawer);
+
+  const handleToggleDrawer = () => {
+    setStorageDrawer(!storageDrawer);
+    setOpenDrawer(!openDrawer);
+  };
 
   return (
     <>
       <AppHeader
         openDrawer={openDrawer}
-        setOpenDrawer={setOpenDrawer}
+        onClick={handleToggleDrawer}
         title={pageTitle}
       />
-      <Drawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+      <Drawer openDrawer={openDrawer} onClick={handleToggleDrawer} />
       <MainPage openDrawer={openDrawer}>{children}</MainPage>
     </>
   );
