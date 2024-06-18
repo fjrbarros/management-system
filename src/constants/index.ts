@@ -2,6 +2,7 @@ export const pathRoutes = {
   home: '/',
   user: '/user',
   product: '/product',
+  brand: '/brand',
   notFound: '*',
 };
 

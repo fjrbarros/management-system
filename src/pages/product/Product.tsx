@@ -3,8 +3,8 @@ import { Typography } from '@mui/material';
 
 export const Product = () => {
   return (
-    <PageWrapper pageTitle="Product">
-      <Typography variant="h3">Product</Typography>
+    <PageWrapper pageTitle="Produto">
+      <Typography variant="h3">Produto</Typography>
     </PageWrapper>
   );
 };

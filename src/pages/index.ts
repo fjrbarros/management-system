@@ -1,3 +1,4 @@
+export * from './brand/Brand';
 export * from './dashboard/Dashboard';
 export * from './notFound/NotFound';
 export * from './product/Product';

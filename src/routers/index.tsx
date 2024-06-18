@@ -1,6 +1,6 @@
 import { pathRoutes } from 'constants';
 import { createBrowserRouter } from 'react-router-dom';
-import { Dashboard, NotFound, Product, User } from '../pages';
+import { Brand, Dashboard, NotFound, Product, User } from '../pages';
 
 export const routers = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ export const routers = createBrowserRouter([
   {
     path: pathRoutes.product,
     element: <Product />,
+  },
+  {
+    path: pathRoutes.brand,
+    element: <Brand />,
   },
   {
     path: pathRoutes.notFound,
