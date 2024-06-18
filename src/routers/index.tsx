@@ -1,22 +1,22 @@
-import { path } from 'constants';
+import { pathRoutes } from 'constants';
 import { createBrowserRouter } from 'react-router-dom';
 import { Dashboard, NotFound, Product, User } from '../pages';
 
 export const routers = createBrowserRouter([
   {
-    path: path.home,
+    path: pathRoutes.home,
     element: <Dashboard />,
   },
   {
-    path: path.user,
+    path: pathRoutes.user,
     element: <User />,
   },
   {
-    path: path.product,
+    path: pathRoutes.product,
     element: <Product />,
   },
   {
-    path: path.notFound,
+    path: pathRoutes.notFound,
     element: <NotFound />,
   },
 ]);

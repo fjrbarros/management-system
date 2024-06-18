@@ -26,6 +26,7 @@
       "@providers": ["providers/index.ts"],
       "@routers": ["routers/index.ts"],
       "@hooks": ["hooks/index.ts"],
+      "@constants": ["constants/index.ts"],
     }
   },
   "include": ["src"],

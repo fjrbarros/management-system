@@ -18,16 +18,16 @@ export interface IModules {
 
 interface DrawerProps {
   openDrawer: boolean;
-  onClick?: () => void;
+  handleCloseDrawer?: () => void;
 }
 
-export const Drawer = ({ openDrawer, onClick }: DrawerProps) => {
+export const Drawer = ({ openDrawer, handleCloseDrawer }: DrawerProps) => {
   const { pathname } = useLocation();
 
   return (
     <DrawerContainer variant="persistent" anchor="left" open={openDrawer}>
       <DrawerHeader>
-        <IconButton onClick={onClick}>
+        <IconButton onClick={handleCloseDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </DrawerHeader>

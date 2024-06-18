@@ -12,6 +12,7 @@ export default defineConfig({
       '@providers': '/src/providers',
       '@routers': '/src/routers',
       '@hooks': '/src/hooks',
+      '@constants': '/src/constants',
     },
   },
 });

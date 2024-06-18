@@ -9,12 +9,12 @@ import { AppBar, IconButton, Toolbar } from './AppHeader.styles';
 interface AppHeaderProps {
   title?: string;
   openDrawer: boolean;
-  onClick?: () => void;
+  handleOpenDrawer?: () => void;
 }
 
 export const AppHeader = ({
   openDrawer,
-  onClick,
+  handleOpenDrawer,
   title = '',
 }: AppHeaderProps) => {
   const theme = useTheme();
@@ -28,7 +28,7 @@ export const AppHeader = ({
           open={openDrawer}
           color="inherit"
           aria-label="open drawer"
-          onClick={onClick}
+          onClick={handleOpenDrawer}
           edge="start"
         >
           <MenuIcon />
