@@ -6,9 +6,6 @@ export const createTheme = (mode: 'light' | 'dark') => {
   return muiCreateTheme({
     palette: {
       mode,
-      primary: {
-        main: isDark ? '#1e1e1e' : '#ffffff',
-      },
       background: {
         default: isDark ? '#5b5b5b' : '#ededed',
       },
@@ -29,6 +26,20 @@ export const createTheme = (mode: 'light' | 'dark') => {
           root: {
             color: isDark ? '#ffffff' : '#636363',
           },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            background: isDark ? '#1e1e1e' : '#ffffff',
+            color: isDark ? '#ffffff' : '#767676',
+            '&:hover': {
+              background: isDark ? '#1e1e1e' : '#ffffff',
+            },
+          },
+        },
+        defaultProps: {
+          variant: 'contained',
         },
       },
       MuiAppBar: {

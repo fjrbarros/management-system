@@ -1,9 +1,10 @@
 import { PageWrapper } from '@components';
+import { Button } from '@mui/material';
 
 export const Brand = () => {
   return (
-    <PageWrapper>
-      <h1>Brand</h1>
+    <PageWrapper pageTitle="Marca">
+      <Button>Cadastrar</Button>
     </PageWrapper>
   );
 };

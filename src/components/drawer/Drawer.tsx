@@ -34,17 +34,20 @@ export const Drawer = ({ openDrawer, handleCloseDrawer }: DrawerProps) => {
       <Divider />
       <List>
         {modules.map(({ title, icon, uri }) => {
+          const isSelected = pathname === uri;
+          const border = isSelected
+            ? '1px dashed #adadad'
+            : '1px solid transparent';
+
           return (
-            pathname !== uri && (
-              <Link uri={uri} key={title}>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>{icon}</ListItemIcon>
-                    <ListItemText primary={title} />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-            )
+            <Link uri={uri} key={title}>
+              <ListItem disablePadding sx={{ border }}>
+                <ListItemButton>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={title} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
           );
         })}
       </List>
