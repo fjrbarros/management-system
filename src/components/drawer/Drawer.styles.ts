@@ -7,12 +7,6 @@ export const DrawerContainer = styled(MuiDrawer)(({ theme }) => ({
     width: theme.drawer.width,
     boxSizing: 'border-box',
   },
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    '& .MuiDrawer-paper': {
-      width: '100%',
-    },
-  },
 }));
 
 export const DrawerHeader = styled('div')(({ theme }) => ({

@@ -8,9 +8,10 @@ export const Main = styled('main', {
   [theme.breakpoints.down('sm')]: {
     marginTop: 56,
     height: 'calc(100vh - 56px)',
-    ...(open && {
-      display: 'none',
-    }),
+    ...(open &&
+      !theme.isSmallerScreen && {
+        display: 'none',
+      }),
   },
   marginTop: 64,
   flexGrow: 1,
@@ -21,11 +22,12 @@ export const Main = styled('main', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  ...(open && {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+  ...(open &&
+    !theme.isSmallerScreen && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: `${theme.drawer.width}px`,
     }),
-    marginLeft: `${theme.drawer.width}px`,
-  }),
 }));

@@ -7,7 +7,7 @@ export const createTheme = (mode: 'light' | 'dark') => {
     palette: {
       mode,
       background: {
-        default: isDark ? '#5b5b5b' : '#ededed',
+        default: isDark ? '#5b5b5b' : '#fafafb',
       },
     },
     drawer: {

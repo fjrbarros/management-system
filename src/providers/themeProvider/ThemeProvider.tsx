@@ -1,6 +1,6 @@
 import { localStorageKeys } from '@constants';
 import { useLocalStorage } from '@hooks';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, useMediaQuery } from '@mui/material';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useMemo, useState } from 'react';
 import { ColorModeContext } from './Context';
@@ -8,11 +8,13 @@ import { createTheme } from './createTheme';
 
 declare module '@mui/material/styles' {
   interface Theme {
+    isSmallerScreen: boolean;
     drawer: {
       width: number;
     };
   }
   interface ThemeOptions {
+    isSmallerScreen?: boolean;
     drawer?: {
       width?: number;
     };
@@ -41,7 +43,12 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     [setThemeMode],
   );
 
-  const theme = useMemo(() => createTheme(mode), [mode]);
+  let theme = useMemo(() => createTheme(mode), [mode]);
+  const isSmallerScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  theme = useMemo(
+    () => ({ ...theme, isSmallerScreen }),
+    [theme, isSmallerScreen],
+  );
 
   return (
     <ColorModeContext.Provider value={colorMode}>

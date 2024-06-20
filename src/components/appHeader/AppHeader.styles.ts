@@ -20,9 +20,10 @@ export const Toolbar = styled(MuiToolbar)({
 });
 
 export const IconButton = styled(MuiIconButton)<IconButtonProps>(
-  ({ open }) => ({
+  ({ open, theme }) => ({
     mr: 2,
-    ...(open && { opacity: 0, pointerEvents: 'none' }),
+    ...(open &&
+      !theme.isSmallerScreen && { opacity: 0, pointerEvents: 'none' }),
   }),
 );
 
@@ -34,12 +35,13 @@ export const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  ...(open && {
-    width: `calc(100% - ${theme.drawer.width}px)`,
-    marginLeft: `${theme.drawer.width}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+  ...(open &&
+    !theme.isSmallerScreen && {
+      width: `calc(100% - ${theme.drawer.width}px)`,
+      marginLeft: `${theme.drawer.width}px`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     }),
-  }),
 }));
