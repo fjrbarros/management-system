@@ -6,10 +6,11 @@ export const Paper = styled(MuiPaper)(({ theme }) => ({
   alignItems: 'center',
   gap: theme.spacing(2),
   cursor: 'pointer',
+  border: `1px solid ${theme.palette.divider}`,
   color:
-    theme.palette.mode === 'dark'
-      ? theme.palette.text.primary
-      : theme.palette.text.secondary,
+    theme.palette.mode === 'light'
+      ? theme.palette.text.secondary
+      : theme.palette.text.primary,
   '&:hover': {
     boxShadow: theme.shadows[3],
   },

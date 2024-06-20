@@ -7,7 +7,7 @@ export const createTheme = (mode: 'light' | 'dark') => {
     palette: {
       mode,
       background: {
-        default: isDark ? '#5b5b5b' : '#fafafb',
+        default: isDark ? '#2f2f2f' : '#fafafb',
       },
     },
     drawer: {
@@ -31,11 +31,8 @@ export const createTheme = (mode: 'light' | 'dark') => {
       MuiButton: {
         styleOverrides: {
           root: {
-            background: isDark ? '#1e1e1e' : '#ffffff',
-            color: isDark ? '#ffffff' : '#767676',
-            '&:hover': {
-              background: isDark ? '#1e1e1e' : '#ffffff',
-            },
+            background: '#1677ff',
+            textTransform: 'none',
           },
         },
         defaultProps: {

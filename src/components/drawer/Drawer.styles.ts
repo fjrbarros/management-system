@@ -1,4 +1,12 @@
-import { Drawer as MuiDrawer, styled } from '@mui/material';
+import {
+  Drawer as MuiDrawer,
+  ListItemButton as MuiListItemButton,
+  ListItemIcon as MuiListItemIcon,
+  Theme,
+  styled,
+} from '@mui/material';
+
+const isLightMode = (theme: Theme) => theme.palette.mode === 'light';
 
 export const DrawerContainer = styled(MuiDrawer)(({ theme }) => ({
   width: theme.drawer.width,
@@ -16,3 +24,51 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+interface ListItemProps {
+  isSelected?: boolean;
+}
+
+export const ListItemIcon = styled(MuiListItemIcon)<ListItemProps>(
+  ({ theme, isSelected }) => ({
+    color: isSelected
+      ? '#1677ff'
+      : isLightMode(theme)
+        ? theme.palette.text.secondary
+        : theme.palette.text.primary,
+  }),
+);
+
+export const ListItemButton = styled(MuiListItemButton)<ListItemProps>(
+  ({ theme, isSelected }) => ({
+    background:
+      isSelected && isLightMode(theme)
+        ? '#e6f4ff'
+        : isSelected
+          ? '#95959517'
+          : 'transparent',
+
+    '& .MuiListItemIcon-root, .MuiListItemText-primary': {
+      color: isSelected
+        ? '#1677ff'
+        : isLightMode(theme)
+          ? theme.palette.text.secondary
+          : theme.palette.text.primary,
+    },
+    '&:hover': {
+      background:
+        isSelected && isLightMode(theme)
+          ? '#e6f4ff'
+          : theme.palette.action.hover,
+    },
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      width: 2.5,
+      height: '100%',
+      background: isSelected ? '#1677ff' : 'transparent',
+    },
+  }),
+);

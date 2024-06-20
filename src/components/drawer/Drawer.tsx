@@ -1,15 +1,17 @@
 import { modules } from '@components';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { ListItem, useMediaQuery, useTheme } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { To, useLocation, useNavigate } from 'react-router-dom';
-import { DrawerContainer, DrawerHeader } from './Drawer.styles';
+import {
+  DrawerContainer,
+  DrawerHeader,
+  ListItemButton,
+  ListItemIcon,
+} from './Drawer.styles';
 
 export interface IModules {
   icon: React.ReactNode;
@@ -53,18 +55,14 @@ export const Drawer = ({ openDrawer, handleCloseDrawer }: DrawerProps) => {
       <List>
         {modules.map(({ title, icon, uri }) => {
           const isSelected = pathname === uri;
-          const border = isSelected
-            ? '1px dashed #adadad'
-            : '1px solid transparent';
 
           return (
             <ListItem
               key={title}
               disablePadding
-              sx={{ border }}
               onClick={() => handleClickItem(uri)}
             >
-              <ListItemButton>
+              <ListItemButton isSelected={isSelected}>
                 <ListItemIcon>{icon}</ListItemIcon>
                 <ListItemText primary={title} />
               </ListItemButton>
