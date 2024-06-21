@@ -1,7 +1,6 @@
 import {
   Drawer as MuiDrawer,
   ListItemButton as MuiListItemButton,
-  ListItemIcon as MuiListItemIcon,
   Theme,
   styled,
 } from '@mui/material';
@@ -28,16 +27,6 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 interface ListItemProps {
   isSelected?: boolean;
 }
-
-export const ListItemIcon = styled(MuiListItemIcon)<ListItemProps>(
-  ({ theme, isSelected }) => ({
-    color: isSelected
-      ? '#1677ff'
-      : isLightMode(theme)
-        ? theme.palette.text.secondary
-        : theme.palette.text.primary,
-  }),
-);
 
 export const ListItemButton = styled(MuiListItemButton)<ListItemProps>(
   ({ theme, isSelected }) => ({

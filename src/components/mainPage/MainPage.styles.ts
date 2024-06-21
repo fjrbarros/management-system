@@ -16,7 +16,7 @@ export const Main = styled('main', {
   marginTop: 64,
   flexGrow: 1,
   height: 'calc(100vh - 64px)',
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.main.background,
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,

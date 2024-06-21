@@ -12,11 +12,17 @@ declare module '@mui/material/styles' {
     drawer: {
       width: number;
     };
+    main: {
+      background: string;
+    };
   }
   interface ThemeOptions {
     isSmallerScreen?: boolean;
     drawer?: {
       width?: number;
+    };
+    main?: {
+      background?: string;
     };
   }
 }

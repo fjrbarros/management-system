@@ -27,6 +27,8 @@
       "@routers": ["routers/index.ts"],
       "@hooks": ["hooks/index.ts"],
       "@constants": ["constants/index.ts"],
+      "@api": ["api/index.ts"],
+      "@utils": ["utils/index.ts"],
     }
   },
   "include": ["src"],

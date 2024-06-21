@@ -13,6 +13,8 @@ export default defineConfig({
       '@routers': '/src/routers',
       '@hooks': '/src/hooks',
       '@constants': '/src/constants',
+      '@api': '/src/api',
+      '@utils': '/src/utils',
     },
   },
 });

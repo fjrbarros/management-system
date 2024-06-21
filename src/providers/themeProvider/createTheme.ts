@@ -6,12 +6,12 @@ export const createTheme = (mode: 'light' | 'dark') => {
   return muiCreateTheme({
     palette: {
       mode,
-      background: {
-        default: isDark ? '#2f2f2f' : '#fafafb',
-      },
     },
     drawer: {
       width: 240,
+    },
+    main: {
+      background: isDark ? '#2f2f2f' : '#fafafb',
     },
     components: {
       MuiTypography: {
@@ -62,9 +62,10 @@ export const createTheme = (mode: 'light' | 'dark') => {
       },
       MuiCssBaseline: {
         styleOverrides: {
-          body: {
+          '*': {
             '::-webkit-scrollbar': {
               width: '10px',
+              height: '10px',
               backgroundColor: '#000',
               borderRadius: '5px',
             },

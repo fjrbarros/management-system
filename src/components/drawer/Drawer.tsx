@@ -1,17 +1,12 @@
 import { modules } from '@components';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { ListItem, useMediaQuery, useTheme } from '@mui/material';
+import { ListItem, ListItemIcon, useMediaQuery, useTheme } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
 import { To, useLocation, useNavigate } from 'react-router-dom';
-import {
-  DrawerContainer,
-  DrawerHeader,
-  ListItemButton,
-  ListItemIcon,
-} from './Drawer.styles';
+import { DrawerContainer, DrawerHeader, ListItemButton } from './Drawer.styles';
 
 export interface IModules {
   icon: React.ReactNode;
