@@ -1,6 +1,8 @@
 import { localStorageKeys } from '@constants';
-import { useLocalStorage } from '@hooks';
+import { useLocalStorage, useModules } from '@hooks';
+import { IModule } from '@types';
 import { PropsWithChildren } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppHeader } from '../appHeader/AppHeader';
 import { Drawer } from '../drawer/Drawer';
 import { MainPage } from '../mainPage/MainPage';
@@ -10,6 +12,9 @@ interface PageWrapperProps extends PropsWithChildren {
 }
 
 export const PageWrapper = ({ children, pageTitle }: PageWrapperProps) => {
+  const { modules } = useModules();
+
+  const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useLocalStorage(
     localStorageKeys.drawer,
     false,
@@ -19,6 +24,10 @@ export const PageWrapper = ({ children, pageTitle }: PageWrapperProps) => {
     setDrawerOpen(!drawerOpen);
   };
 
+  const handleClickDrawerItem = (module: IModule) => {
+    navigate(module.uri);
+  };
+
   return (
     <>
       <AppHeader
@@ -26,7 +35,12 @@ export const PageWrapper = ({ children, pageTitle }: PageWrapperProps) => {
         handleOpenDrawer={handleToggleDrawer}
         title={pageTitle}
       />
-      <Drawer openDrawer={drawerOpen} handleCloseDrawer={handleToggleDrawer} />
+      <Drawer
+        openDrawer={drawerOpen}
+        drawerItems={modules}
+        handleCloseDrawer={handleToggleDrawer}
+        onClickDrawerItem={handleClickDrawerItem}
+      />
       <MainPage openDrawer={drawerOpen}>{children}</MainPage>
     </>
   );

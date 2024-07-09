@@ -28,36 +28,34 @@ interface ListItemProps {
   isSelected?: boolean;
 }
 
-export const ListItemButton = styled(MuiListItemButton)<ListItemProps>(
-  ({ theme, isSelected }) => ({
-    background:
-      isSelected && isLightMode(theme)
-        ? '#e6f4ff'
-        : isSelected
-          ? '#95959517'
-          : 'transparent',
+export const ListItemButton = styled(MuiListItemButton, {
+  shouldForwardProp: prop => prop !== 'isSelected',
+})<ListItemProps>(({ theme, isSelected }) => ({
+  background:
+    isSelected && isLightMode(theme)
+      ? '#e6f4ff'
+      : isSelected
+        ? '#95959517'
+        : 'transparent',
 
-    '& .MuiListItemIcon-root, .MuiListItemText-primary': {
-      color: isSelected
-        ? '#1677ff'
-        : isLightMode(theme)
-          ? theme.palette.text.secondary
-          : theme.palette.text.primary,
-    },
-    '&:hover': {
-      background:
-        isSelected && isLightMode(theme)
-          ? '#e6f4ff'
-          : theme.palette.action.hover,
-    },
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      width: 2.5,
-      height: '100%',
-      background: isSelected ? '#1677ff' : 'transparent',
-    },
-  }),
-);
+  '& .MuiListItemIcon-root, .MuiListItemText-primary': {
+    color: isSelected
+      ? '#1677ff'
+      : isLightMode(theme)
+        ? theme.palette.text.secondary
+        : theme.palette.text.primary,
+  },
+  '&:hover': {
+    background:
+      isSelected && isLightMode(theme) ? '#e6f4ff' : theme.palette.action.hover,
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    width: 2.5,
+    height: '100%',
+    background: isSelected ? '#1677ff' : 'transparent',
+  },
+}));

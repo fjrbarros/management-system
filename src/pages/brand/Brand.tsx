@@ -12,8 +12,7 @@ import {
 import { useMemo } from 'react';
 
 export const Brand = () => {
-  const { data, isLoading, isError } = useGetBrands();
-  console.log({ data, isLoading, isError });
+  const { data, isLoading } = useGetBrands();
 
   const columns = useMemo<MRT_ColumnDef<IBrandResponse>[]>(
     () => [

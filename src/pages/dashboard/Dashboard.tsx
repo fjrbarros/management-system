@@ -1,10 +1,10 @@
-import { PageWrapper, modules } from '@components';
+import { PageWrapper } from '@components';
+import { useModules } from '@hooks';
 import { Grid } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 import { Card } from './sub-components';
 
 export const Dashboard = () => {
-  const { pathname } = useLocation();
+  const { modules } = useModules();
 
   return (
     <PageWrapper pageTitle="Dashboard">
@@ -13,9 +13,9 @@ export const Dashboard = () => {
         spacing={2}
         columns={{ xs: 12, sm: 4, md: 6, lg: 12, xl: 12 }}
       >
-        {modules.map(({ icon, title, uri }) => {
+        {modules.map(({ icon, title, uri, isSelected }) => {
           return (
-            pathname !== uri && (
+            !isSelected && (
               <Card key={title} icon={icon} title={title} uri={uri} />
             )
           );

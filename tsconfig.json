@@ -29,6 +29,7 @@
       "@constants": ["constants/index.ts"],
       "@api": ["api/index.ts"],
       "@utils": ["utils/index.ts"],
+      "@types": ["types/index.ts"],
     }
   },
   "include": ["src"],
