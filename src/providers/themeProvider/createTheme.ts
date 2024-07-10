@@ -31,8 +31,11 @@ export const createTheme = (mode: 'light' | 'dark') => {
       MuiButton: {
         styleOverrides: {
           root: {
-            background: '#1677ff',
             textTransform: 'none',
+          },
+          containedPrimary: {
+            background: '#1677ff',
+            color: '#ffffff',
           },
         },
         defaultProps: {
@@ -58,6 +61,11 @@ export const createTheme = (mode: 'light' | 'dark') => {
           root: {
             background: isDark ? '#1e1e1e' : '#ffffff',
           },
+        },
+      },
+      MuiTextField: {
+        defaultProps: {
+          variant: 'standard',
         },
       },
       MuiCssBaseline: {
