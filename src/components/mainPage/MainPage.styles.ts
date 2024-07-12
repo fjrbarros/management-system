@@ -7,7 +7,7 @@ export const Main = styled('main', {
 }>(({ theme, open }) => ({
   [theme.breakpoints.down('sm')]: {
     marginTop: 56,
-    height: 'calc(100vh - 56px)',
+    minHeight: 'calc(100vh - 56px)',
     ...(open &&
       !theme.isSmallerScreen && {
         display: 'none',
@@ -15,7 +15,7 @@ export const Main = styled('main', {
   },
   marginTop: 64,
   flexGrow: 1,
-  height: 'calc(100vh - 64px)',
+  minHeight: 'calc(100vh - 64px)',
   backgroundColor: theme.main.background,
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {

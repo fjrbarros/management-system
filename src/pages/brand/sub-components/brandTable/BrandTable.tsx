@@ -1,4 +1,4 @@
-import { IBrandResponse, useGetBrands } from '@api';
+import { IBrand, useGetBrands } from '@api';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { formatDate } from '@utils';
@@ -7,12 +7,14 @@ import {
   MRT_ColumnDef,
   MaterialReactTable,
 } from 'material-react-table';
+import { useBrandContext } from 'pages/brand/provider';
 import { useMemo } from 'react';
 
-export const Table = () => {
+export const BrandTable = () => {
   const { data, isLoading } = useGetBrands();
+  const { setUpdateBrand } = useBrandContext();
 
-  const columns = useMemo<MRT_ColumnDef<IBrandResponse>[]>(
+  const columns = useMemo<MRT_ColumnDef<IBrand>[]>(
     () => [
       {
         accessorKey: 'brand_id',
@@ -49,12 +51,16 @@ export const Table = () => {
           header: 'Ações',
         },
       }}
-      renderRowActionMenuItems={({ table, closeMenu }) => [
+      renderRowActionMenuItems={({ table, closeMenu, row }) => [
         <MRT_ActionMenuItem
           icon={<EditIcon />}
           key="edit"
           label="Editar"
-          onClick={closeMenu}
+          onClick={() => {
+            const { brand_id, name } = row.original;
+            setUpdateBrand({ brand_id, name });
+            closeMenu();
+          }}
           table={table}
         />,
         <MRT_ActionMenuItem

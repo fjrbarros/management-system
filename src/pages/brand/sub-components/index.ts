@@ -1,3 +1,3 @@
-export * from './modal/Modal';
-export * from './table/Table';
+export * from './brandModal/BrandModal';
+export * from './brandTable/BrandTable';
 //

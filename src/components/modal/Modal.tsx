@@ -1,5 +1,5 @@
+import { LoadingButton } from '@components';
 import CloseIcon from '@mui/icons-material/Close';
-import { IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -9,24 +9,45 @@ import * as Styles from './Modal.styles';
 
 interface IModalProps extends PropsWithChildren {
   open: boolean;
-  handleClose: () => void;
+  onClose: () => void;
   title?: string;
-  submitButtonLabel?: string;
-  cancelButtonLabel?: string;
-  onSubmit?: () => void;
+  cancelButton?: {
+    label?: string;
+    onClick?: () => void;
+  };
+  submitButton?: {
+    label?: string;
+    onClick?: () => void;
+    isLoading?: boolean;
+  };
 }
 
 export const Modal = ({
   open,
-  handleClose,
-  submitButtonLabel = 'Salvar',
-  cancelButtonLabel = 'Cancelar',
-  onSubmit,
+  onClose,
+  title = 'Cadastro',
+  cancelButton,
+  submitButton,
   children,
 }: IModalProps) => {
+  const {
+    label: submitButtonLabel = 'Salvar',
+    isLoading: submitButtonIsLoading,
+    onClick: submitButtonOnClick,
+  } = submitButton ?? {};
+  const {
+    label: cancelButtonLabel = 'Cancelar',
+    onClick: cancelButtonOnClick,
+  } = cancelButton ?? {};
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit?.();
+    submitButtonOnClick?.();
+  };
+
+  const handleClose = () => {
+    onClose();
+    cancelButtonOnClick?.();
   };
 
   return (
@@ -41,27 +62,18 @@ export const Modal = ({
         onSubmit: handleSubmit,
       }}
     >
-      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-        Modal title
-      </DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={handleClose}
-        sx={{
-          position: 'absolute',
-          right: 8,
-          top: 8,
-          color: theme => theme.palette.grey[500],
-        }}
-      >
+      <DialogTitle sx={{ m: 0, p: 2 }}>{title}</DialogTitle>
+      <Styles.IconButton aria-label="close" onClick={handleClose}>
         <CloseIcon />
-      </IconButton>
+      </Styles.IconButton>
       <DialogContent dividers>{children}</DialogContent>
       <DialogActions>
         <Button onClick={handleClose} variant="outlined" color="error">
           {cancelButtonLabel}
         </Button>
-        <Button type="submit">{submitButtonLabel}</Button>
+        <LoadingButton type="submit" isLoading={submitButtonIsLoading}>
+          {submitButtonLabel}
+        </LoadingButton>
       </DialogActions>
     </Styles.Dialog>
   );

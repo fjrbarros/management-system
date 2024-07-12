@@ -1,18 +1,24 @@
 import { PageWrapper } from '@components';
 import { Button } from '@mui/material';
-import { useState } from 'react';
-import { Modal, Table } from './sub-components';
+import { BrandProvider, useBrandContext } from './provider';
+import { BrandModal, BrandTable } from './sub-components';
 
-export const Brand = () => {
-  const [open, setOpen] = useState(false);
+const BrandPage = () => {
+  const { openModal, handleOpenModal } = useBrandContext();
 
   return (
     <PageWrapper pageTitle="Marca">
-      <Button sx={{ marginBottom: 3 }} onClick={() => setOpen(true)}>
+      <Button sx={{ marginBottom: 3 }} onClick={handleOpenModal}>
         Cadastrar
       </Button>
-      <Table />
-      <Modal open={open} onClose={() => setOpen(false)} />
+      <BrandTable />
+      {openModal && <BrandModal />}
     </PageWrapper>
   );
 };
+
+export const Brand = () => (
+  <BrandProvider>
+    <BrandPage />
+  </BrandProvider>
+);

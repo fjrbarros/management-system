@@ -12,3 +12,5 @@ export const localStorageKeys = {
   drawer: `${systemName}-drawer`,
   theme: `${systemName}-theme`,
 };
+
+export const GET_BRANDS_QUERY_KEY = 'brands';
