@@ -1,10 +1,12 @@
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { Context } from './Context';
-import { IUpdateBrand } from './types';
+import { IDeleteBrand, IUpdateBrand } from './types';
 
 export const BrandProvider = ({ children }: PropsWithChildren) => {
   const [openModal, setOpenModal] = useState(false);
   const [updateBrand, setUpdateBrand] = useState<IUpdateBrand | undefined>();
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deleteBrand, setDeleteBrand] = useState<IDeleteBrand | undefined>();
 
   const handleOpenModal = () => setOpenModal(true);
 
@@ -13,11 +15,22 @@ export const BrandProvider = ({ children }: PropsWithChildren) => {
     setUpdateBrand(undefined);
   };
 
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+    setDeleteBrand(undefined);
+  };
+
   useEffect(() => {
     if (updateBrand) {
       handleOpenModal();
     }
   }, [updateBrand]);
+
+  useEffect(() => {
+    if (deleteBrand) {
+      setOpenDeleteModal(true);
+    }
+  }, [deleteBrand]);
 
   const value = useMemo(
     () => ({
@@ -26,8 +39,12 @@ export const BrandProvider = ({ children }: PropsWithChildren) => {
       handleCloseModal,
       updateBrand,
       setUpdateBrand,
+      openDeleteModal,
+      deleteBrand,
+      setDeleteBrand,
+      handleCloseDeleteModal,
     }),
-    [openModal, updateBrand],
+    [deleteBrand, openDeleteModal, openModal, updateBrand],
   );
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

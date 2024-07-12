@@ -1,10 +1,10 @@
 import { PageWrapper } from '@components';
 import { Button } from '@mui/material';
 import { BrandProvider, useBrandContext } from './provider';
-import { BrandModal, BrandTable } from './sub-components';
+import { BrandDeleteModal, BrandModal, BrandTable } from './sub-components';
 
 const BrandPage = () => {
-  const { openModal, handleOpenModal } = useBrandContext();
+  const { openModal, openDeleteModal, handleOpenModal } = useBrandContext();
 
   return (
     <PageWrapper pageTitle="Marca">
@@ -13,6 +13,7 @@ const BrandPage = () => {
       </Button>
       <BrandTable />
       {openModal && <BrandModal />}
+      {openDeleteModal && <BrandDeleteModal />}
     </PageWrapper>
   );
 };

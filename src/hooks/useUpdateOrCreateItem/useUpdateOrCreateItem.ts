@@ -11,19 +11,38 @@ export const useUpdateOrCreateItem = <T>({
 }: IUpdateItemProps<T>) => {
   const queryClient = useQueryClient();
 
-  const updateOrCreateItem = async (updateItem: T, itemId = '') => {
+  const cancelQueries = async () => {
     await queryClient.cancelQueries({ queryKey: queryKey } as QueryFilters);
-    const oldData = queryClient.getQueryData<T[]>(queryKey as QueryKey);
-
-    if (itemId) {
-      queryClient.setQueryData(
-        queryKey,
-        oldData?.map(item => (item[primaryKey] === itemId ? updateItem : item)),
-      );
-    } else {
-      queryClient.setQueryData(queryKey, [...(oldData ?? []), updateItem]);
-    }
   };
 
-  return updateOrCreateItem;
+  const getOldData = () => queryClient.getQueryData<T[]>(queryKey as QueryKey);
+
+  const updateData = (data: T[] | undefined) => {
+    queryClient.setQueryData(queryKey, data);
+  };
+
+  const createItem = async (updateItem: T) => {
+    await cancelQueries();
+    const oldData = getOldData();
+
+    updateData([...(oldData ?? []), updateItem]);
+  };
+
+  const updateItem = async (updateItem: T, itemId = '') => {
+    await cancelQueries();
+    const oldData = getOldData();
+
+    updateData(
+      oldData?.map(item => (item[primaryKey] === itemId ? updateItem : item)),
+    );
+  };
+
+  const deleteItem = async (itemId: string) => {
+    await cancelQueries();
+    const oldData = getOldData();
+
+    updateData(oldData?.filter(item => item[primaryKey] !== itemId));
+  };
+
+  return { createItem, updateItem, deleteItem };
 };

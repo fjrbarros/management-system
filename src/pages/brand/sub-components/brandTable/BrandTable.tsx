@@ -12,7 +12,7 @@ import { useMemo } from 'react';
 
 export const BrandTable = () => {
   const { data, isLoading } = useGetBrands();
-  const { setUpdateBrand } = useBrandContext();
+  const { setUpdateBrand, setDeleteBrand } = useBrandContext();
 
   const columns = useMemo<MRT_ColumnDef<IBrand>[]>(
     () => [
@@ -67,7 +67,11 @@ export const BrandTable = () => {
           icon={<DeleteIcon />}
           key="delete"
           label="Remover"
-          onClick={closeMenu}
+          onClick={() => {
+            const { brand_id, name } = row.original;
+            setDeleteBrand({ brand_id, name });
+            closeMenu();
+          }}
           table={table}
         />,
       ]}

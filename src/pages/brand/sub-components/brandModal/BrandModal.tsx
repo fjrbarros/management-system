@@ -22,7 +22,7 @@ const brandSchema = z.object({
 export const BrandModal = () => {
   const { openModal, handleCloseModal, updateBrand } = useBrandContext();
   const { name = '', brand_id } = updateBrand ?? {};
-  const updateOrCreateItem = useUpdateOrCreateItem<IBrand>({
+  const { createItem, updateItem } = useUpdateOrCreateItem<IBrand>({
     queryKey: [GET_BRANDS_QUERY_KEY],
     primaryKey: 'brand_id',
   });
@@ -48,7 +48,11 @@ export const BrandModal = () => {
       { name, brand_id: brand_id },
       {
         onSuccess: async ([resp]) => {
-          await updateOrCreateItem(resp, brand_id);
+          if (brand_id) {
+            await updateItem(resp, brand_id);
+          } else {
+            await createItem(resp);
+          }
           handleClose();
         },
         onError: error => {
@@ -70,6 +74,7 @@ export const BrandModal = () => {
     >
       <TextField
         label="Nome da marca"
+        autoComplete="off"
         fullWidth
         autoFocus
         error={!!errors.name}

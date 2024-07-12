@@ -9,6 +9,7 @@ import * as Styles from './Modal.styles';
 
 interface IModalProps extends PropsWithChildren {
   open: boolean;
+  variant?: 'default' | 'delete';
   onClose: () => void;
   title?: string;
   cancelButton?: {
@@ -24,12 +25,14 @@ interface IModalProps extends PropsWithChildren {
 
 export const Modal = ({
   open,
+  variant = 'default',
   onClose,
   title = 'Cadastro',
   cancelButton,
   submitButton,
   children,
 }: IModalProps) => {
+  const isDeleteVariant = variant === 'delete';
   const {
     label: submitButtonLabel = 'Salvar',
     isLoading: submitButtonIsLoading,
@@ -68,10 +71,18 @@ export const Modal = ({
       </Styles.IconButton>
       <DialogContent dividers>{children}</DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} variant="outlined" color="error">
+        <Button
+          onClick={handleClose}
+          variant="outlined"
+          color={isDeleteVariant ? 'primary' : 'error'}
+        >
           {cancelButtonLabel}
         </Button>
-        <LoadingButton type="submit" isLoading={submitButtonIsLoading}>
+        <LoadingButton
+          type="submit"
+          isLoading={submitButtonIsLoading}
+          color={isDeleteVariant ? 'error' : 'primary'}
+        >
           {submitButtonLabel}
         </LoadingButton>
       </DialogActions>
