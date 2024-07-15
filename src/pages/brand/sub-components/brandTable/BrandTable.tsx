@@ -7,11 +7,13 @@ import {
   MRT_ColumnDef,
   MaterialReactTable,
 } from 'material-react-table';
+import { MRT_Localization_PT_BR } from 'material-react-table/locales/pt-BR';
 import { useBrandContext } from 'pages/brand/provider';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export const BrandTable = () => {
-  const { data, isLoading } = useGetBrands();
+  const [filter, setFilter] = useState('');
+  const { data, isLoading } = useGetBrands({ filter });
   const { setUpdateBrand, setDeleteBrand } = useBrandContext();
 
   const columns = useMemo<MRT_ColumnDef<IBrand>[]>(
@@ -41,16 +43,20 @@ export const BrandTable = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      state={{
-        isLoading,
-      }}
+      state={{ isLoading, globalFilter: filter }}
+      localization={MRT_Localization_PT_BR}
       enableRowActions
+      manualFiltering
+      enableColumnFilters={false}
+      enableSorting={false}
+      enableHiding={false}
+      enableColumnActions={false}
       positionActionsColumn="last"
-      displayColumnDefOptions={{
-        'mrt-row-actions': {
-          header: 'Ações',
-        },
+      muiPaginationProps={{
+        rowsPerPageOptions: [10, 25, 50],
       }}
+      positionGlobalFilter="left"
+      onGlobalFilterChange={value => setFilter(value)}
       renderRowActionMenuItems={({ table, closeMenu, row }) => [
         <MRT_ActionMenuItem
           icon={<EditIcon />}
