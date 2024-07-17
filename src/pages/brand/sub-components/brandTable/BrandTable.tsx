@@ -20,7 +20,7 @@ export const BrandTable = () => {
   const { data, isLoading } = useGetBrands({
     filter,
     page: filter ? 0 : pagination.pageIndex,
-    pageSize: pagination.pageSize,
+    pageSize: filter ? 999 : pagination.pageSize,
   });
 
   const columns = useMemo<MRT_ColumnDef<IBrand>[]>(
@@ -32,10 +32,10 @@ export const BrandTable = () => {
         accessorFn: ({ brand_id }) => brand_id.split('-')[0],
         enableClickToCopy: true,
         muiCopyButtonProps: ({ row }) => ({
+          startIcon: <ContentCopy />,
           onClick: () => {
             navigator.clipboard.writeText(row.original.brand_id);
           },
-          startIcon: <ContentCopy />,
         }),
       },
       {

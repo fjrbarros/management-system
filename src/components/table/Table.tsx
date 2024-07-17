@@ -21,7 +21,7 @@ interface ITableProps<TData extends MRT_RowData> {
   filter: string;
   onPaginationChange: (pagination: MRT_Updater<MRT_PaginationState>) => void;
   onGlobalFilterChange: (filter: string) => void;
-  muiSearchTextFieldProps: TextFieldProps;
+  muiSearchTextFieldProps?: TextFieldProps;
   onClickEdit?: (row: MRT_Row<TData>) => void;
   onClickDelete?: (row: MRT_Row<TData>) => void;
   muiPaginationProps?: Record<string, unknown>;
