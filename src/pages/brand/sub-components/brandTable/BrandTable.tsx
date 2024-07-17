@@ -76,9 +76,12 @@ export const BrandTable = () => {
       rowCount={filter ? data.data.length : data.totalCount}
       paginationDisplayMode="pages"
       onPaginationChange={setPagination}
-      muiSearchTextFieldProps={{ placeholder: 'Pesquisar por nome' }}
+      muiSearchTextFieldProps={{
+        placeholder: 'Pesquisar por nome',
+        autoComplete: 'off',
+      }}
       positionGlobalFilter="left"
-      onGlobalFilterChange={value => setFilter(value)}
+      onGlobalFilterChange={setFilter}
       renderRowActionMenuItems={({ table, closeMenu, row }) => [
         <MRT_ActionMenuItem
           icon={<EditIcon />}
