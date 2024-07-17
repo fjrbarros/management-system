@@ -59,7 +59,7 @@ export const BrandModal = () => {
 
   return (
     <Modal
-      title="Cadastrar marca"
+      title={brand_id ? 'Editar marca' : 'Nova marca'}
       open={openModal}
       onClose={handleClose}
       submitButton={{
