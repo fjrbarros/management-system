@@ -1,4 +1,4 @@
-import { pathRoutes } from 'constants';
+import { pathRoutes } from '@constants';
 import { createBrowserRouter } from 'react-router-dom';
 import { Brand, Dashboard, NotFound, Product, User } from '../pages';
 
