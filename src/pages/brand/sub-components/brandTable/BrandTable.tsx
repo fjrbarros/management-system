@@ -1,16 +1,9 @@
 import { IBrand, useGetBrands } from '@api';
+import { Table } from '@components';
 import { DEFAULT_ROWS_PER_PAGE } from '@constants';
 import { ContentCopy } from '@mui/icons-material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { formatDate } from '@utils';
-import {
-  MRT_ActionMenuItem,
-  MRT_ColumnDef,
-  MRT_PaginationState,
-  MaterialReactTable,
-} from 'material-react-table';
-import { MRT_Localization_PT_BR } from 'material-react-table/locales/pt-BR';
+import { MRT_ColumnDef, MRT_PaginationState } from 'material-react-table';
 import { useBrandContext } from 'pages/brand/provider';
 import { useMemo, useState } from 'react';
 
@@ -61,59 +54,29 @@ export const BrandTable = () => {
   );
 
   return (
-    <MaterialReactTable
+    <Table
       columns={columns}
       data={data.data}
-      state={{ isLoading, pagination, globalFilter: filter }}
-      initialState={{ showGlobalFilter: true }}
-      localization={MRT_Localization_PT_BR}
-      enableRowActions
-      manualFiltering
-      manualPagination
-      enableColumnFilters={false}
-      enableSorting={false}
-      enableHiding={false}
-      enableColumnActions={false}
-      positionActionsColumn="last"
-      muiPaginationProps={{
-        rowsPerPageOptions: DEFAULT_ROWS_PER_PAGE,
-        color: 'primary',
-        shape: 'rounded',
-        variant: 'outlined',
-      }}
+      isLoading={isLoading}
+      filter={filter}
+      pagination={pagination}
       rowCount={filter ? data.data.length : data.totalCount}
-      paginationDisplayMode="pages"
       onPaginationChange={setPagination}
+      onGlobalFilterChange={setFilter}
       muiSearchTextFieldProps={{
         placeholder: 'Pesquisar por nome',
-        autoComplete: 'off',
       }}
-      positionGlobalFilter="left"
-      onGlobalFilterChange={setFilter}
-      renderRowActionMenuItems={({ table, closeMenu, row }) => [
-        <MRT_ActionMenuItem
-          icon={<EditIcon />}
-          key="edit"
-          label="Editar"
-          onClick={() => {
-            const { brand_id, name } = row.original;
-            setUpdateBrand({ brand_id, name });
-            closeMenu();
-          }}
-          table={table}
-        />,
-        <MRT_ActionMenuItem
-          icon={<DeleteIcon />}
-          key="delete"
-          label="Remover"
-          onClick={() => {
-            const { brand_id, name } = row.original;
-            setDeleteBrand({ brand_id, name });
-            closeMenu();
-          }}
-          table={table}
-        />,
-      ]}
+      muiPaginationProps={{
+        rowsPerPageOptions: DEFAULT_ROWS_PER_PAGE,
+      }}
+      onClickEdit={row => {
+        const { brand_id, name } = row.original;
+        setUpdateBrand({ brand_id, name });
+      }}
+      onClickDelete={row => {
+        const { brand_id, name } = row.original;
+        setDeleteBrand({ brand_id, name });
+      }}
     />
   );
 };
