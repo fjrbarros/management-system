@@ -14,3 +14,5 @@ export const localStorageKeys = {
 };
 
 export const GET_BRANDS_QUERY_KEY = 'brands';
+
+export const DEFAULT_ROWS_PER_PAGE = [10, 25, 50];

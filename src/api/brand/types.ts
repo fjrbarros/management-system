@@ -5,6 +5,11 @@ export interface IBrand {
   name: string;
 }
 
+export interface IBrandResponse {
+  data: IBrand[];
+  totalCount: number;
+}
+
 export interface IBrandParams {
   name: string;
   brand_id?: string;

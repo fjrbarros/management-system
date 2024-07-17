@@ -1,7 +1,7 @@
 import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { supabase } from 'api/supabaseClient';
-import { IBrand, IBrandParams } from './types';
+import { IBrand, IBrandParams, IBrandResponse } from './types';
 
 const getPagination = (page = 0, size = 10) => {
   const limit = size ? +size : 1;
@@ -11,15 +11,20 @@ const getPagination = (page = 0, size = 10) => {
   return { from, to };
 };
 
-export const useGetBrands = ({ filter = '' }) => {
-  const { from, to } = getPagination();
+export const useGetBrands = ({ filter = '', page = 0, pageSize = 10 }) => {
   const {
     data: resp,
     isLoading,
     isError,
-  } = useQuery<IBrand[]>({
-    queryKey: [GET_BRANDS_QUERY_KEY, filter],
+  } = useQuery<IBrandResponse>({
+    queryKey: [GET_BRANDS_QUERY_KEY, filter, page, pageSize],
     queryFn: async () => {
+      const { count } = await supabase
+        .from('brand')
+        .select('*', { count: 'exact', head: true });
+
+      const { from, to } = getPagination(page, pageSize);
+
       let query = supabase
         .from('brand')
         .select()
@@ -36,11 +41,11 @@ export const useGetBrands = ({ filter = '' }) => {
         throw new Error(error.message);
       }
 
-      return data;
+      return { data, totalCount: count ?? data?.length ?? 0 };
     },
   });
 
-  const data = resp ?? [];
+  const data: IBrandResponse = resp ?? { data: [], totalCount: 0 };
 
   return { data, isLoading, isError };
 };

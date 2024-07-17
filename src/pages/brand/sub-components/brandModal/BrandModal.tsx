@@ -1,9 +1,9 @@
-import { IBrand, usePostBrand } from '@api';
+import { usePostBrand } from '@api';
 import { Modal } from '@components';
 import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useUpdateOrCreateItem } from '@hooks';
 import { TextField } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useBrandContext } from 'pages/brand/provider';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -21,11 +21,8 @@ const brandSchema = z.object({
 
 export const BrandModal = () => {
   const { openModal, handleCloseModal, updateBrand } = useBrandContext();
+  const queryclient = useQueryClient();
   const { name = '', brand_id } = updateBrand ?? {};
-  const { createItem, updateItem } = useUpdateOrCreateItem<IBrand>({
-    queryKey: [GET_BRANDS_QUERY_KEY],
-    primaryKey: 'brand_id',
-  });
   const { mutate, isPending } = usePostBrand();
   const {
     register,
@@ -47,12 +44,10 @@ export const BrandModal = () => {
     mutate(
       { name, brand_id: brand_id },
       {
-        onSuccess: async ([resp]) => {
-          if (brand_id) {
-            await updateItem(resp, brand_id);
-          } else {
-            await createItem(resp);
-          }
+        onSuccess: async () => {
+          await queryclient.invalidateQueries({
+            queryKey: [GET_BRANDS_QUERY_KEY],
+          });
           handleClose();
         },
         onError: error => {
@@ -69,7 +64,7 @@ export const BrandModal = () => {
       onClose={handleClose}
       submitButton={{
         onClick: handleSubmit(onSubmit),
-        isLoading: isPending,
+        isLoading: isPending || !!queryclient.isFetching(),
       }}
     >
       <TextField
