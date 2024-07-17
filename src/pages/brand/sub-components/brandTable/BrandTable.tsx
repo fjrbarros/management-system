@@ -1,5 +1,6 @@
 import { IBrand, useGetBrands } from '@api';
 import { DEFAULT_ROWS_PER_PAGE } from '@constants';
+import { ContentCopy } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { formatDate } from '@utils';
@@ -36,6 +37,13 @@ export const BrandTable = () => {
         header: 'Código',
         size: 150,
         accessorFn: ({ brand_id }) => brand_id.split('-')[0],
+        enableClickToCopy: true,
+        muiCopyButtonProps: ({ row }) => ({
+          onClick: () => {
+            navigator.clipboard.writeText(row.original.brand_id);
+          },
+          startIcon: <ContentCopy />,
+        }),
       },
       {
         accessorKey: 'name',
