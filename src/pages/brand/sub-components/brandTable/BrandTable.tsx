@@ -1,5 +1,5 @@
 import { IBrand, useGetBrands } from '@api';
-import { Table } from '@components';
+import { Error, Table } from '@components';
 import { DEFAULT_ROWS_PER_PAGE } from '@constants';
 import { ContentCopy } from '@mui/icons-material';
 import { formatDate } from '@utils';
@@ -17,7 +17,7 @@ export const BrandTable = () => {
   const [filter, setFilter] = useState('');
   const [pagination, setPagination] =
     useState<MRT_PaginationState>(defaultPagination);
-  const { data, isLoading } = useGetBrands({
+  const { data, isLoading, isError, error } = useGetBrands({
     search: filter,
     page: filter ? 0 : pagination.pageIndex,
     pageSize: filter ? 999 : pagination.pageSize,
@@ -52,6 +52,17 @@ export const BrandTable = () => {
     ],
     [],
   );
+
+  if (isError) {
+    return (
+      <Error
+        title="Erro ao buscar marcas"
+        subtitle="Por favor, tente novamente mais tarde ou entre em contato com o administrador do sistema."
+        code={error?.code}
+        message={error?.message}
+      />
+    );
+  }
 
   return (
     <Table
