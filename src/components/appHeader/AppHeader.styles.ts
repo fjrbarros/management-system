@@ -1,11 +1,10 @@
-import {
-  AppBarProps as MuiAppBarProps,
-  IconButton as MuiIconButton,
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiIconButton, {
   IconButtonProps as MuiIconButtonProps,
-  Toolbar as MuiToolbar,
-  styled,
-} from '@mui/material';
-import MuiAppBar from '@mui/material/AppBar';
+} from '@mui/material/IconButton';
+import MuiToolbar from '@mui/material/Toolbar';
+
+import { styled } from '@mui/material/styles';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

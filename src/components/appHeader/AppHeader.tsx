@@ -42,7 +42,12 @@ export const AppHeader = ({
         <Typography variant="h6" noWrap component="div">
           {title}
         </Typography>
-        <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+        <IconButton
+          aria-label="brightness"
+          sx={{ ml: 1 }}
+          onClick={toggleColorMode}
+          color="inherit"
+        >
           {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </Toolbar>
