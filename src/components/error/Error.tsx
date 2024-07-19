@@ -12,18 +12,24 @@ interface IErrorProps {
 export const Error = ({ title, subtitle, code, message }: IErrorProps) => (
   <Styles.Paper>
     <ErrorOutline color="error" sx={{ fontSize: '3rem', marginBottom: 1 }} />
-    <Typography variant="subtitle1" align="center">
+    <Typography variant="h6" align="center">
       {title}
     </Typography>
     {subtitle && (
-      <Typography margin="10px 0" variant="subtitle2" align="center">
-        {subtitle}
-      </Typography>
+      <>
+        <Styles.Divider />
+        <Typography variant="subtitle2" align="center">
+          {subtitle}
+        </Typography>
+      </>
     )}
     {code && (
-      <Typography variant="caption" align="center">
-        code: {code}
-      </Typography>
+      <>
+        <Styles.Divider />
+        <Typography variant="caption" align="center">
+          code: {code}
+        </Typography>
+      </>
     )}
     {message && (
       <Typography variant="caption" align="center">

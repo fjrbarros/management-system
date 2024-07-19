@@ -1,4 +1,8 @@
-import { Paper as MuiPaper, styled } from '@mui/material';
+import {
+  Divider as MuiDivider,
+  Paper as MuiPaper,
+  styled,
+} from '@mui/material';
 
 export const Paper = styled(MuiPaper)(({ theme }) => ({
   display: 'flex',
@@ -6,3 +10,8 @@ export const Paper = styled(MuiPaper)(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(4),
 }));
+
+export const Divider = styled(MuiDivider)({
+  width: '100%',
+  margin: '10px 0',
+});
