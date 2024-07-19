@@ -1,4 +1,4 @@
-import { usePostBrand } from '@api';
+import { usePostBrand, usePutBrand } from '@api';
 import { Modal } from '@components';
 import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +23,9 @@ export const BrandModal = () => {
   const { openModal, handleCloseModal, updateBrand } = useBrandContext();
   const queryclient = useQueryClient();
   const { name = '', brand_id } = updateBrand ?? {};
-  const { mutate, isPending } = usePostBrand();
+  const { mutate: postMutate, isPending: isPendingPost } = usePostBrand();
+  const { mutate: putMutate, isPending: isPendingPut } = usePutBrand();
+  const isPending = isPendingPost || isPendingPut;
   const {
     register,
     formState: { errors },
@@ -41,8 +43,9 @@ export const BrandModal = () => {
   };
 
   const onSubmit = ({ name }: IFormValues) => {
-    mutate(
-      { name, brand_id: brand_id },
+    const saveMethod = brand_id ? putMutate : postMutate;
+    saveMethod(
+      { name, brand_id },
       {
         onSuccess: async () => {
           await queryclient.invalidateQueries({

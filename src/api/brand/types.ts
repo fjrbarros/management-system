@@ -14,3 +14,9 @@ export interface IBrandParams {
   name: string;
   brand_id?: string;
 }
+
+export interface IGetBrandsParams {
+  page: number;
+  pageSize: number;
+  search: string;
+}

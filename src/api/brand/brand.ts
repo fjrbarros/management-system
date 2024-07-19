@@ -1,23 +1,36 @@
 import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { CustomError } from 'api/customError/CustomError';
 import { supabase } from 'api/supabaseClient';
-import { IBrand, IBrandParams, IBrandResponse } from './types';
+import { checkItemExists, formatItemName, getPagination } from 'api/utils';
+import { IBrandParams, IBrandResponse, IGetBrandsParams } from './types';
 
-const getPagination = (page = 0, size = 10) => {
-  const limit = size ? +size : 1;
-  const from = page ? page * limit : 0;
-  const to = page ? from + size - 1 : size - 1;
+const validateExistsBrand = async (value: string) => {
+  const brandExists = await checkItemExists({
+    table: 'brand',
+    property: 'name',
+    value,
+  });
 
-  return { from, to };
+  if (brandExists) {
+    throw new Error(
+      'O nome da marca já existe. Por favor, escolha um nome diferente.',
+    );
+  }
 };
 
-export const useGetBrands = ({ filter = '', page = 0, pageSize = 10 }) => {
+export const useGetBrands = ({
+  search = '',
+  page,
+  pageSize,
+}: IGetBrandsParams) => {
   const {
     data: resp,
     isLoading,
     isError,
-  } = useQuery<IBrandResponse>({
-    queryKey: [GET_BRANDS_QUERY_KEY, filter, page, pageSize],
+    error,
+  } = useQuery<IBrandResponse, CustomError>({
+    queryKey: [GET_BRANDS_QUERY_KEY, search, page, pageSize],
     queryFn: async () => {
       const { count } = await supabase
         .from('brand')
@@ -31,14 +44,17 @@ export const useGetBrands = ({ filter = '', page = 0, pageSize = 10 }) => {
         .order('name', { ascending: true })
         .range(from, to);
 
-      if (filter) {
-        query = query.ilike('name', `%${filter}%`);
+      if (search) {
+        query = query.ilike('name', `%${search}%`);
       }
 
       const { data, error } = await query;
 
       if (error) {
-        throw new Error(error.message);
+        throw new CustomError({
+          message: error.message,
+          code: error.code,
+        });
       }
 
       return { data, totalCount: count ?? data?.length ?? 0 };
@@ -47,47 +63,51 @@ export const useGetBrands = ({ filter = '', page = 0, pageSize = 10 }) => {
 
   const data: IBrandResponse = resp ?? { data: [], totalCount: 0 };
 
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, error };
 };
 
 export const usePostBrand = () => {
-  const {
-    mutate,
-    data = [],
-    isError,
-    error,
-    isPending,
-  } = useMutation({
-    mutationFn: async ({ name = '', brand_id = '' }: IBrandParams) => {
-      if (brand_id) {
-        const { data, error } = await supabase
-          .from('brand')
-          .upsert({ name, brand_id })
-          .select()
-          .returns<IBrand[]>();
+  const { mutate, isPending } = useMutation({
+    mutationFn: async ({ name = '' }: IBrandParams) => {
+      const formattedName = formatItemName(name).trim();
 
-        if (error) {
-          throw new Error(error.message);
-        }
+      await validateExistsBrand(name);
 
-        return data || [];
-      }
-
-      const { data, error: error } = await supabase
+      const { data, error } = await supabase
         .from('brand')
-        .upsert({ name })
-        .select()
-        .returns<IBrand[]>();
+        .insert({ name: formattedName });
 
       if (error) {
-        throw new Error(error.message);
+        throw error;
       }
 
       return data || [];
     },
   });
 
-  return { mutate, data, isError, error, isPending };
+  return { mutate, isPending };
+};
+
+export const usePutBrand = () => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async ({ name, brand_id }: IBrandParams) => {
+      const formattedName = formatItemName(name).trim();
+
+      await validateExistsBrand(name);
+
+      const { data, error } = await supabase
+        .from('brand')
+        .upsert({ name: formattedName, brand_id });
+
+      if (error) {
+        throw error;
+      }
+
+      return data || [];
+    },
+  });
+
+  return { mutate, isPending };
 };
 
 export const useDeleteBrand = () => {

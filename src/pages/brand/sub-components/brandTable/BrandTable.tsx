@@ -18,7 +18,7 @@ export const BrandTable = () => {
   const [pagination, setPagination] =
     useState<MRT_PaginationState>(defaultPagination);
   const { data, isLoading } = useGetBrands({
-    filter,
+    search: filter,
     page: filter ? 0 : pagination.pageIndex,
     pageSize: filter ? 999 : pagination.pageSize,
   });
