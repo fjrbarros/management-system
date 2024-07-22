@@ -8,10 +8,6 @@ export const Main = styled('main', {
   [theme.breakpoints.down('sm')]: {
     marginTop: 56,
     minHeight: 'calc(100vh - 56px)',
-    ...(open &&
-      !theme.isSmallerScreen && {
-        display: 'none',
-      }),
   },
   marginTop: 64,
   flexGrow: 1,

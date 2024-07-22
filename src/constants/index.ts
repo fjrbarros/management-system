@@ -8,6 +8,8 @@ export const pathRoutes = {
 
 const systemName = 'management-system';
 
+export const drawerWidth = 240;
+
 export const localStorageKeys = {
   drawer: `${systemName}-drawer`,
   theme: `${systemName}-theme`,

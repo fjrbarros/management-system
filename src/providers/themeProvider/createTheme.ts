@@ -1,3 +1,4 @@
+import { drawerWidth } from '@constants';
 import { createTheme as muiCreateTheme } from '@mui/material/styles';
 
 export const createTheme = (mode: 'light' | 'dark') => {
@@ -8,7 +9,7 @@ export const createTheme = (mode: 'light' | 'dark') => {
       mode,
     },
     drawer: {
-      width: 240,
+      width: drawerWidth,
     },
     main: {
       background: isDark ? '#2f2f2f' : '#fafafb',
