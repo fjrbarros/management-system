@@ -1,7 +1,6 @@
 import { useScrollTrigger } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useThemeContext } from '@providers';
-import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { AppHeader } from './AppHeader';
 

@@ -1,5 +1,4 @@
 import { drawerWidth } from '@constants';
-import '@testing-library/jest-dom';
 import { screen } from '@testing-library/react';
 import { customRender } from '@utils';
 import { MainPage } from './MainPage';
