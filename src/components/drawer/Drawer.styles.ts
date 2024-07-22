@@ -1,9 +1,7 @@
-import {
-  Drawer as MuiDrawer,
-  ListItemButton as MuiListItemButton,
-  Theme,
-  styled,
-} from '@mui/material';
+import { Theme } from '@mui/material';
+import MuiDrawer from '@mui/material/Drawer';
+import MuiListItemButton from '@mui/material/ListItemButton';
+import { styled } from '@mui/material/styles';
 
 const isLightMode = (theme: Theme) => theme.palette.mode === 'light';
 

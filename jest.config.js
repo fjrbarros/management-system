@@ -7,6 +7,9 @@ module.exports = {
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
     '@components': '<rootDir>/src/components',
     '@providers': '<rootDir>/src/providers',
+    '@constants': '<rootDir>/src/constants',
+    '@hooks': '<rootDir>/src/hooks',
+    '@utils': '<rootDir>/src/utils',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',

@@ -1,10 +1,13 @@
 import * as Icons from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { ListItem, ListItemIcon, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { useTheme } from '@mui/material/styles';
 import { IModule } from '@types';
 import { createElement } from 'react';
 import { DrawerContainer, DrawerHeader, ListItemButton } from './Drawer.styles';
@@ -40,7 +43,7 @@ export const Drawer = ({
       onClose={handleCloseDrawer}
     >
       <DrawerHeader>
-        <IconButton onClick={handleCloseDrawer}>
+        <IconButton aria-label="close drawer" onClick={handleCloseDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </DrawerHeader>
