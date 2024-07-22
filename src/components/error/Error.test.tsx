@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { Error } from './Error';
 
-describe('Error Component', () => {
+describe('Error', () => {
   it('renders correctly with required props', () => {
     render(<Error title="Error Title" />);
 
