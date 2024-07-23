@@ -1,4 +1,4 @@
-import { supabase } from 'api/supabaseClient';
+import { supabase } from '../../supabaseClient';
 
 interface ICheckItemExists {
   table: string;
