@@ -10,6 +10,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 jest.mock('@hooks', () => ({
+  useLocalStorage: jest.fn(),
   useModules: jest.fn(() => ({
     modules: [
       {
@@ -21,7 +22,6 @@ jest.mock('@hooks', () => ({
       },
     ],
   })),
-  useLocalStorage: jest.fn(() => ['light', jest.fn()]),
 }));
 
 const renderComponent = (props = {}) => {
@@ -38,7 +38,16 @@ const renderComponent = (props = {}) => {
 };
 
 describe('PageWrapper', () => {
-  beforeEach(() => {});
+  const setDrawerOpen = jest.fn();
+  beforeEach(() => {
+    (useLocalStorage as jest.Mock)
+      .mockImplementationOnce(() => ['light', jest.fn()])
+      .mockImplementationOnce(() => [false, setDrawerOpen]);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it('renders the children correctly', () => {
     renderComponent();
 
@@ -51,15 +60,12 @@ describe('PageWrapper', () => {
     expect(screen.getByText('Page title')).toBeInTheDocument();
   });
 
-  it('toggles the drawer when the header button is clicked', () => {
-    const setDrawerOpen = jest.fn();
-    (useLocalStorage as jest.Mock).mockReturnValue(['light', setDrawerOpen]);
-
+  it('should open drawer when the header button is clicked', () => {
     renderComponent();
 
     fireEvent.click(screen.getByRole('button', { name: 'open drawer' }));
 
-    expect(setDrawerOpen).toHaveBeenCalledWith(false);
+    expect(setDrawerOpen).toHaveBeenCalledWith(true);
   });
 
   it('navigates to the selected module when the drawer item is clicked', () => {

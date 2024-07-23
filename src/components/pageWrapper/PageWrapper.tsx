@@ -13,7 +13,6 @@ interface PageWrapperProps extends PropsWithChildren {
 
 export const PageWrapper = ({ children, pageTitle }: PageWrapperProps) => {
   const { modules } = useModules();
-
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useLocalStorage(
     localStorageKeys.drawer,
