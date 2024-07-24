@@ -29,7 +29,7 @@ describe('useDeleteBrand', () => {
     const { result } = renderHook(() => useDeleteBrand(), { wrapper });
 
     await act(async () => {
-      await result.current.mutate('1');
+      result.current.mutate('1');
     });
 
     expect(result.current.isPending).toBe(false);
@@ -41,7 +41,7 @@ describe('useDeleteBrand', () => {
     const { result } = renderHook(() => useDeleteBrand(), { wrapper });
 
     await act(async () => {
-      await result.current.mutate('1');
+      result.current.mutate('1');
     });
 
     expect(result.current.isPending).toBe(false);

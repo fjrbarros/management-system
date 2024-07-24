@@ -11,15 +11,13 @@ export const usePutBrand = () => {
 
       await validateExistsBrand(name);
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('brand')
         .upsert({ name: formattedName, brand_id });
 
       if (error) {
         throw error;
       }
-
-      return data || [];
     },
   });
 
