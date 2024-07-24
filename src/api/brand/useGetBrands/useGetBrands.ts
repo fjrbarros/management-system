@@ -1,15 +1,12 @@
 import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { useQuery } from '@tanstack/react-query';
-import { CustomError } from 'api/customError/CustomError';
-import { supabase } from 'api/supabaseClient';
-import { getPagination } from 'api/utils';
+import { CustomError } from '../../';
+import { supabase } from '../../supabaseClient';
+import { getPagination } from '../../utils';
+import { getCountBrand } from '../getCountBrand/getCountBrand';
 import { IBrandResponse, IGetBrandsParams } from '../types';
 
-export const useGetBrands = ({
-  search = '',
-  page,
-  pageSize,
-}: IGetBrandsParams) => {
+export const useGetBrands = ({ search, page, pageSize }: IGetBrandsParams) => {
   const {
     data: resp,
     isLoading,
@@ -18,10 +15,6 @@ export const useGetBrands = ({
   } = useQuery<IBrandResponse, CustomError>({
     queryKey: [GET_BRANDS_QUERY_KEY, search, page, pageSize],
     queryFn: async () => {
-      const { count } = await supabase
-        .from('brand')
-        .select('*', { count: 'exact', head: true });
-
       const { from, to } = getPagination(page, pageSize);
 
       let query = supabase
@@ -43,7 +36,9 @@ export const useGetBrands = ({
         });
       }
 
-      return { data, totalCount: count ?? data?.length ?? 0 };
+      const count = await getCountBrand('brand');
+
+      return { data, totalCount: count };
     },
   });
 

@@ -1,3 +1,3 @@
 export * from './formatDate/formatDate';
-export * from './utilTest/utilTest';
+export * from './test/customRender';
 //

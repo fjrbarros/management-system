@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { formatItemName } from 'api/utils';
 import { supabase } from '../../supabaseClient';
+import { formatItemName } from '../../utils';
 import { IBrandParams } from '../types';
 import { validateExistsBrand } from '../validateExistsBrand/validateExistsBrand';
 
