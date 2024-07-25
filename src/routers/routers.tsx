@@ -1,8 +1,7 @@
 import { pathRoutes } from '@constants';
-import { createBrowserRouter } from 'react-router-dom';
 import { Brand, Dashboard, NotFound, Product, User } from '../pages';
 
-export const routers = createBrowserRouter([
+export const routersConfig = [
   {
     path: pathRoutes.home,
     element: <Dashboard />,
@@ -23,4 +22,4 @@ export const routers = createBrowserRouter([
     path: pathRoutes.notFound,
     element: <NotFound />,
   },
-]);
+];

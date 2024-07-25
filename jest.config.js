@@ -10,6 +10,7 @@ module.exports = {
     '@constants': '<rootDir>/src/constants',
     '@hooks': '<rootDir>/src/hooks',
     '@utils': '<rootDir>/src/utils',
+    '@api': '<rootDir>/src/api',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',

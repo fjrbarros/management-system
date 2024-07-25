@@ -4,9 +4,9 @@ import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TextField } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-import { useBrandContext } from 'pages/brand/provider';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useBrandContext } from '../../provider';
 
 interface IFormValues {
   name: string;

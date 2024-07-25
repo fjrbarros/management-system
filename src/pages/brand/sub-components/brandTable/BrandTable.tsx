@@ -4,8 +4,8 @@ import { DEFAULT_ROWS_PER_PAGE } from '@constants';
 import { ContentCopy } from '@mui/icons-material';
 import { formatDate } from '@utils';
 import { MRT_ColumnDef, MRT_PaginationState } from 'material-react-table';
-import { useBrandContext } from 'pages/brand/provider';
 import { useMemo, useState } from 'react';
+import { useBrandContext } from '../../provider';
 
 const defaultPagination: MRT_PaginationState = {
   pageIndex: 0,

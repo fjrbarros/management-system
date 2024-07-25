@@ -3,8 +3,8 @@ import { Modal } from '@components';
 import { GET_BRANDS_QUERY_KEY } from '@constants';
 import { Typography } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
-import { useBrandContext } from 'pages/brand/provider';
 import { useState } from 'react';
+import { useBrandContext } from '../../provider';
 
 export const BrandDeleteModal = () => {
   const queryclient = useQueryClient();
