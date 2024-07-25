@@ -3,7 +3,7 @@ import { useModules } from '@hooks';
 import { Grid } from '@mui/material';
 import { Card } from './sub-components';
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const { modules } = useModules();
 
   return (

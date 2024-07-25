@@ -1,4 +1,5 @@
-import { screen } from '@testing-library/react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { screen, waitFor } from '@testing-library/react';
 import { customRender } from '@utils';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { routersConfig } from './routers';
@@ -11,7 +12,9 @@ describe('routers', () => {
 
     customRender(<RouterProvider router={router} />);
 
-    expect(screen.queryAllByText(/dashboard/i)).toHaveLength(2);
+    await waitFor(() => {
+      expect(screen.queryAllByText(/dashboard/i)).toHaveLength(2);
+    });
   });
 
   it('should render user when router is /user', async () => {
@@ -21,7 +24,9 @@ describe('routers', () => {
 
     customRender(<RouterProvider router={router} />);
 
-    expect(screen.queryAllByText(/usuário/i)).toHaveLength(2);
+    await waitFor(() => {
+      expect(screen.queryAllByText(/usuário/i)).toHaveLength(2);
+    });
   });
 
   it('should render product when router is /product', async () => {
@@ -31,7 +36,9 @@ describe('routers', () => {
 
     customRender(<RouterProvider router={router} />);
 
-    expect(screen.queryAllByText(/produto/i)).toHaveLength(2);
+    await waitFor(() => {
+      expect(screen.queryAllByText(/produto/i)).toHaveLength(2);
+    });
   });
 
   it('should render brand when router is /brand', async () => {
@@ -41,7 +48,9 @@ describe('routers', () => {
 
     customRender(<RouterProvider router={router} />);
 
-    expect(screen.queryAllByText(/marca/i)).toHaveLength(2);
+    await waitFor(() => {
+      expect(screen.queryAllByText(/marca/i)).toHaveLength(2);
+    });
   });
 
   it('should render not found when router is not defined', async () => {
@@ -51,6 +60,8 @@ describe('routers', () => {
 
     customRender(<RouterProvider router={router} />);
 
-    expect(screen.getByText(/not found/i)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/not found/i)).toBeInTheDocument();
+    });
   });
 });

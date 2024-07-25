@@ -18,8 +18,10 @@ const BrandPage = () => {
   );
 };
 
-export const Brand = () => (
+const Brand = () => (
   <BrandProvider>
     <BrandPage />
   </BrandProvider>
 );
+
+export default Brand;
