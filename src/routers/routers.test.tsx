@@ -61,7 +61,7 @@ describe('routers', () => {
     customRender(<RouterProvider router={router} />);
 
     await waitFor(() => {
-      expect(screen.getByText(/not found/i)).toBeInTheDocument();
+      expect(screen.getByText(/404/i)).toBeInTheDocument();
     });
   });
 });
