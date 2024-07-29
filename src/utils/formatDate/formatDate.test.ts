@@ -5,7 +5,7 @@ describe.each([
   { date: 'invalid date', expected: '' },
   { date: '10-10-2021', expected: '10/10/2021' },
 ])('formatDate($date)', ({ date, expected }) => {
-  test(`returns ${expected} when date is ${date}`, () => {
+  it(`returns ${expected} when date is ${date}`, () => {
     expect(formatDate(date)).toBe(expected);
   });
 });
