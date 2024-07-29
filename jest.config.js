@@ -20,6 +20,7 @@ module.exports = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
     '!src/**/*.styles.*',
+    '!src/main.tsx',
   ],
   coverageThreshold: {
     global: {
