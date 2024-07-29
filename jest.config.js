@@ -21,6 +21,8 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/**/*.styles.*',
     '!src/main.tsx',
+    '!src/api/supabaseClient.ts',
+    '!src/providers/themeProvider/createTheme.ts',
   ],
   coverageThreshold: {
     global: {
