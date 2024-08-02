@@ -7,11 +7,11 @@ export const Main = styled('main', {
 }>(({ theme, open }) => ({
   [theme.breakpoints.down('sm')]: {
     marginTop: 56,
-    minHeight: 'calc(100vh - 56px)',
+    minHeight: 'calc(100dvh - 56px)',
   },
   marginTop: 64,
   flexGrow: 1,
-  minHeight: 'calc(100vh - 64px)',
+  minHeight: 'calc(100dvh - 64px)',
   backgroundColor: theme.main.background,
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {

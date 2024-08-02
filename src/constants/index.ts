@@ -1,5 +1,6 @@
 export const pathRoutes = {
-  home: '/',
+  login: '/login',
+  dashboard: '/',
   user: '/user',
   product: '/product',
   brand: '/brand',

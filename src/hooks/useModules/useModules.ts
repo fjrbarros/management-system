@@ -8,15 +8,15 @@ export const useModules = () => {
 
   const modules: IModule[] = useMemo(() => {
     const isSelected = (uri: To) => pathname === uri;
-    const { home, user, product, brand } = pathRoutes;
+    const { dashboard, user, product, brand } = pathRoutes;
 
     return [
       {
         id: 'dashboard',
         icon: 'Home',
         title: 'Dashboard',
-        uri: home,
-        isSelected: isSelected(home),
+        uri: dashboard,
+        isSelected: isSelected(dashboard),
       },
       {
         id: 'user',

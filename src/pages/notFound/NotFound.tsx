@@ -24,7 +24,10 @@ const NotFound = () => {
         <Typography color="white" variant="body2" align="center">
           Verifique se a URL está correta ou clique no botão abaixo para voltar
         </Typography>
-        <Button variant="outlined" onClick={() => navigate(pathRoutes.home)}>
+        <Button
+          variant="outlined"
+          onClick={() => navigate(pathRoutes.dashboard)}
+        >
           Inicio
         </Button>
       </TextContainer>

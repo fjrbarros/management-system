@@ -8,11 +8,12 @@ interface IPages {
   component: React.ComponentType;
 }
 
-const { home, user, product, brand, notFound } = pathRoutes;
-const { Dashboard, User, Product, Brand, NotFound } = lazyPages;
+const { login, dashboard, user, product, brand, notFound } = pathRoutes;
+const { Login, Dashboard, User, Product, Brand, NotFound } = lazyPages;
 
 const pages: IPages[] = [
-  { path: home, component: Dashboard },
+  { path: login, component: Login },
+  { path: dashboard, component: Dashboard },
   { path: user, component: User },
   { path: product, component: Product },
   { path: brand, component: Brand },
