@@ -1,5 +1,9 @@
 import { createContext, useContext } from 'react';
 
-export const ColorModeContext = createContext({});
+interface IThemeContext {
+  toggleColorMode: () => void;
+}
+
+export const ColorModeContext = createContext({} as IThemeContext);
 
 export const useThemeContext = () => useContext(ColorModeContext);
